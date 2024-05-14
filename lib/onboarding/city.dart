@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:visanka/Theming/color.dart';
+import 'package:visanka/theme/color.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 bool press =false;
 String city='';
@@ -140,7 +140,7 @@ class _CityState extends State<City> {
                   dropdownDecoratorProps:  DropDownDecoratorProps(
                     baseStyle:Theme.of(context).textTheme.bodyMedium,
                     dropdownSearchDecoration: const InputDecoration(
-                      hintText: "Select property type",
+                      hintText: "Select city",
                       hintStyle: khintstyle,
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: AppColor.primary),

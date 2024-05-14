@@ -2,8 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:visanka/Theming/color.dart';
-import 'package:visanka/onboarding/welcome.dart';
+import 'package:visanka/theme/color.dart';
+import 'package:visanka/view/onBoardViews/welcome_View.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import'package:visanka/onboarding/city.dart';
 bool press =false;

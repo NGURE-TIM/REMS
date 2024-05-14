@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:visanka/Theming/color.dart';
+import 'package:provider/provider.dart';
+import 'package:visanka/theme/color.dart';
 import 'package:visanka/onboarding/property.dart';
+import 'package:visanka/viewModel/welcome_viewModel.dart';
 
-List <String> buttonsRow1 =['Buy','Rent',];
-//List<bool> buttonStatesRow2 =List.generate(2, (int x) => false);
-//List <String> buttonsRow2=['Sell','Just look around',];
-late List<bool> buttonStatesRow1 =List.generate(2, (int x) => false);
-bool nav =true;
+
 class Welcome extends StatefulWidget {
   static const id = '/welcome';
 
@@ -20,6 +18,8 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+
+  final  WelcomeViewModel _viewModel = WelcomeViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -82,15 +82,14 @@ class _WelcomeState extends State<Welcome> {
                       children: List.generate(2, (index)
                           {
                             return outlinedButton(
-                              buttonsRow1[index],
+                              _viewModel.buttons[index],
                                   () {
-                                setState(() {
-                                  buttonStatesRow1[index] = !buttonStatesRow1[index];
-                                  //:todo implement state management
-                                   Navigator.push(context, MaterialPageRoute(builder: (context) =>Property(buttonsRow1[index])),);
-                                });
+                                         Provider.of<WelcomeViewModel>(context , listen: false).toggleButtonState(index);
+
+                                   Navigator.push(context, MaterialPageRoute(builder: (context) =>Property( _viewModel.buttons[index])),);
+
                               },
-                              buttonStatesRow1[index],
+                          index,
                             );
                           }
                       )
@@ -107,31 +106,34 @@ class _WelcomeState extends State<Welcome> {
 
   }
 
- outlinedButton(String text, Function () onTap ,bool press) {
-    return InkWell(
-      highlightColor: null,
-      splashColor: AppColor.primary ,
-      radius: 20,
-      borderRadius: BorderRadius.circular(12),
-      onTap: onTap,
-      child: Container(
-        width: 140,
-        height: 70,
-        decoration: BoxDecoration(
-          color: press?AppColor.primary:Colors.transparent,
-          borderRadius: BorderRadius.circular(12), // Adjust border radius as needed
-          border: Border.all(
-            width: 1,
-            color: AppColor.secondary, // Define border color
+ outlinedButton(String text, Function () onTap ,int index) {
+
+    return Consumer<WelcomeViewModel>( builder:(context,dataProviderModel,child){
+      return InkWell(
+        highlightColor: null,
+        splashColor: AppColor.primary ,
+        radius: 20,
+        borderRadius: BorderRadius.circular(12),
+        onTap: onTap,
+        child: Container(
+            width: 140,
+            height: 70,
+            decoration: BoxDecoration(
+              color:dataProviderModel.buttonStates[index]?AppColor.primary:Colors.transparent,
+              borderRadius: BorderRadius.circular(12), // Adjust border radius as needed
+              border: Border.all(
+                width: 1,
+                color: AppColor.secondary, // Define border color
+              ),
+            ),
+            child: Center(
+              child: Text(
+                text,
+                style: dataProviderModel.buttonStates[index] ? Theme.of(context).textTheme.bodyLarge:Theme.of(context).textTheme.bodyMedium,
+              ),
+            )
         ),
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: press ? Theme.of(context).textTheme.bodyLarge:Theme.of(context).textTheme.bodyMedium,
-          ),
-        )
-      ),
-    );
+      );
+    });
  }
 }

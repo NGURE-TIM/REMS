@@ -1,9 +1,10 @@
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import'package:flutter/material.dart';
-import 'package:visanka/onboarding/welcome.dart';
+import 'package:visanka/view/onBoardViews/welcome_View.dart';
 
 
 class Splash extends StatelessWidget {
+  static const id = '/splash';
   const Splash({Key? key}) : super(key: key);
 
   @override
