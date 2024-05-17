@@ -2,18 +2,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:visanka/theme/color.dart';
 import 'package:visanka/view/onBoardViews/welcome_View.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import'package:visanka/onboarding/city.dart';
-bool press =false;
-String property = '';
+import'package:visanka/view/onBoardViews/city_view.dart';
+import 'package:visanka/viewModel/property_viewModel.dart';
+
+
 const khintstyle=TextStyle(
     color: AppColor.grey
 );
-List<String> properties =['Apartments',
-  'Houses','Offices','Villas' ,'Lands'
-];
 String selectedItem ='';
 
 class Property extends StatefulWidget {
@@ -25,6 +24,7 @@ class Property extends StatefulWidget {
 }
 
 class _PropertyState extends State<Property> {
+  PropertyViewModel _propertyViewModel =PropertyViewModel();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -74,14 +74,7 @@ actions: [Padding(
                   height: 50,
                 ),
                 DropdownSearch<String>(
-                  onChanged: (value){
-                    property=value!;
-                    setState(() {
-                      if(property!=''){
-                        press=true;
-                      }
-                    });
-                  },
+                  onChanged: Provider.of<PropertyViewModel>(context , listen: false).Function(),
                   popupProps:  PopupProps.menu(
                     showSelectedItems: true,
                     searchFieldProps : TextFieldProps(
@@ -139,7 +132,7 @@ actions: [Padding(
                       shadowColor:  AppColor.primary
                     ),
                   ),
-                  items: properties,
+                  items: _propertyViewModel.properties,
                   dropdownDecoratorProps:  DropDownDecoratorProps(
                     baseStyle:Theme.of(context).textTheme.bodyMedium,
                     dropdownSearchDecoration: const InputDecoration(
@@ -158,22 +151,28 @@ actions: [Padding(
                   height: 300,
                 ),
                 Center(
-                  child: ElevatedButton(onPressed:(){
-                    Navigator.pushNamed(context, City.id);
+                  child: Consumer<PropertyViewModel>( builder:(context,dataProviderModel,child){
+                    return ElevatedButton(onPressed:(){
+                      if (_propertyViewModel.onPressed){
+                        Navigator.pushNamed(context, City.id);
+                      }
+                    },
+                      style:
 
-                  },
-                  style:
                       ElevatedButton.styleFrom(
-                      fixedSize: Size(200, 45),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                      elevation: 5, backgroundColor: press?AppColor.primary:Colors.white,
+                        fixedSize: Size(200, 45),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        elevation: 5, backgroundColor:   dataProviderModel.onPressed ?AppColor.primary:Colors.white,
                       ), child: Text(
-                      'Next',
-                      style:press ? Theme.of(context).textTheme.bodyLarge:Theme.of(context).textTheme.bodyMedium,
+                        'Next',
+                        style: dataProviderModel.onPressed ? Theme.of(context).textTheme.bodyLarge:Theme.of(context).textTheme.bodyMedium,
 
                       ),
-                      ),
+                    );
+                  }
+                  ),
                 ),
+
               ],
             ),
           ),

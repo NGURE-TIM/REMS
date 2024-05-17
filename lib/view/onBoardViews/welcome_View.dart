@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:visanka/theme/color.dart';
-import 'package:visanka/onboarding/property.dart';
+import 'package:visanka/view/onBoardViews/property_view.dart';
 import 'package:visanka/viewModel/welcome_viewModel.dart';
 
 

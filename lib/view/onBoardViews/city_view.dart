@@ -2,16 +2,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:visanka/theme/color.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-bool press =false;
-String city='';
+import 'package:visanka/viewModel/city_viewModel.dart';
+
 const khintstyle=TextStyle(
     color: AppColor.grey
 );
-List<String> cities =['Patna',
-  'Delhi','Aligarh','Varanasi' ,'Queens'
-];
+
 String selectedItem ='';
 
 class City extends StatefulWidget {
@@ -21,6 +20,9 @@ class City extends StatefulWidget {
 }
 
 class _CityState extends State<City> {
+
+  CityViewModel _cityViewModel = CityViewModel();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -37,7 +39,9 @@ class _CityState extends State<City> {
               actions: [Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      //todo: Navigate to
+                    },
                     child: const Text(
                       'Skip',
                       style: TextStyle(
@@ -71,14 +75,7 @@ class _CityState extends State<City> {
                   height: 50,
                 ),
                 DropdownSearch<String>(
-                  onChanged: (value){
-                    city=value!;
-                    setState(() {
-                      if(city!=''){
-                        press=true;
-                      }
-                    });
-                  },
+                  onChanged:Provider.of<CityViewModel>(context , listen: false).Function(),
                   popupProps:  PopupProps.menu(
                     showSelectedItems: true,
                     searchFieldProps :  TextFieldProps(
@@ -136,7 +133,7 @@ class _CityState extends State<City> {
                         shadowColor:  AppColor.primary
                     ),
                   ),
-                  items: cities,
+                  items: _cityViewModel.cities,
                   dropdownDecoratorProps:  DropDownDecoratorProps(
                     baseStyle:Theme.of(context).textTheme.bodyMedium,
                     dropdownSearchDecoration: const InputDecoration(
@@ -155,20 +152,23 @@ class _CityState extends State<City> {
                   height: 300,
                 ),
                 Center(
-                  child: ElevatedButton(onPressed:(){
+                  child: Consumer<CityViewModel>( builder:(context,dataProviderModel,child){
+                      return ElevatedButton(onPressed:(){
+print(dataProviderModel.onPressed);
+                      },
+                      style:
 
-                  },
-                    style:
-
-                    ElevatedButton.styleFrom(
+                      ElevatedButton.styleFrom(
                       fixedSize: Size(200, 45),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                      elevation: 5, backgroundColor: press?AppColor.primary:Colors.white,
-                    ), child: Text(
+                      elevation: 5, backgroundColor:   dataProviderModel.onPressed ?AppColor.primary:Colors.white,
+                      ), child: Text(
                       'Next',
-                      style:press ? Theme.of(context).textTheme.bodyLarge:Theme.of(context).textTheme.bodyMedium,
+                      style: dataProviderModel.onPressed ? Theme.of(context).textTheme.bodyLarge:Theme.of(context).textTheme.bodyMedium,
 
-                    ),
+                  ),
+                  );
+                    }
                   ),
                 ),
               ],
