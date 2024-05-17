@@ -6,7 +6,9 @@ import 'package:provider/provider.dart';
 import 'package:visanka/theme/color.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:visanka/viewModel/city_viewModel.dart';
+import 'package:visanka/view/homeViews/home.dart';
 
+import '../../main.dart';
 const khintstyle=TextStyle(
     color: AppColor.grey
 );
@@ -32,15 +34,22 @@ class _CityState extends State<City> {
         ),
         SafeArea(child: Scaffold(
           appBar:  AppBar(
-              leading: IconButton(onPressed: () {
-                Navigator.pop(context);
-              }, icon:Icon(Icons.arrow_back),),
+              leading:  IconButton(
+              icon: Icon(REM.themeNotifier.value == ThemeMode.light
+    ? Icons.dark_mode
+        : Icons.light_mode),
+    onPressed: () {
+      REM.themeNotifier.value =
+      REM.themeNotifier.value == ThemeMode.light
+    ? ThemeMode.dark
+        : ThemeMode.light;
+    }),
 
               actions: [Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: GestureDetector(
                     onTap: (){
-                      //todo: Navigate to
+                      Navigator.pushNamed(context, Home.id);
                     },
                     child: const Text(
                       'Skip',
@@ -154,7 +163,9 @@ class _CityState extends State<City> {
                 Center(
                   child: Consumer<CityViewModel>( builder:(context,dataProviderModel,child){
                       return ElevatedButton(onPressed:(){
-print(dataProviderModel.onPressed);
+                        if (dataProviderModel.onPressed){
+                          Navigator.pushNamed(context, Home.id);
+                        }
                       },
                       style:
 

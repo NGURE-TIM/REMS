@@ -9,6 +9,8 @@ import 'package:dropdown_search/dropdown_search.dart';
 import'package:visanka/view/onBoardViews/city_view.dart';
 import 'package:visanka/viewModel/property_viewModel.dart';
 
+import '../homeViews/home.dart';
+
 
 const khintstyle=TextStyle(
     color: AppColor.grey
@@ -41,7 +43,9 @@ class _PropertyState extends State<Property> {
 actions: [Padding(
   padding: const EdgeInsets.only(right: 20),
   child: GestureDetector(
-      onTap: (){},
+      onTap: (){
+        Navigator.pushNamed(context, Home.id);
+      },
       child: const Text(
           'Skip',
         style: TextStyle(
@@ -153,7 +157,7 @@ actions: [Padding(
                 Center(
                   child: Consumer<PropertyViewModel>( builder:(context,dataProviderModel,child){
                     return ElevatedButton(onPressed:(){
-                      if (_propertyViewModel.onPressed){
+                      if (dataProviderModel.onPressed){
                         Navigator.pushNamed(context, City.id);
                       }
                     },
