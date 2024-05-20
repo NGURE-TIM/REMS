@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:visanka/viewModel/city_viewModel.dart';
-import 'package:visanka/models/onboardModel.dart';
+import 'package:visanka/viewModel/city_view_model.dart';
+import 'package:visanka/models/onboard_model.dart';
 
 class PropertyViewModel extends  CityViewModel {
   String  property = Property.property;

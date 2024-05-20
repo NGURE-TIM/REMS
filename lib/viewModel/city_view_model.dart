@@ -1,4 +1,4 @@
-import 'package:visanka/models/onboardModel.dart';
+import 'package:visanka/models/onboard_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class CityViewModel extends ChangeNotifier {

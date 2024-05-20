@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:visanka/theme/color.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:visanka/viewModel/city_viewModel.dart';
+import 'package:visanka/viewModel/city_view_model.dart';
 import 'package:visanka/view/homeViews/home.dart';
 
 import '../../main.dart';
@@ -34,16 +34,7 @@ class _CityState extends State<City> {
         ),
         SafeArea(child: Scaffold(
           appBar:  AppBar(
-              leading:  IconButton(
-              icon: Icon(REM.themeNotifier.value == ThemeMode.light
-    ? Icons.dark_mode
-        : Icons.light_mode),
-    onPressed: () {
-      REM.themeNotifier.value =
-      REM.themeNotifier.value == ThemeMode.light
-    ? ThemeMode.dark
-        : ThemeMode.light;
-    }),
+
 
               actions: [Padding(
                 padding: const EdgeInsets.only(right: 20),
@@ -108,12 +99,12 @@ class _CityState extends State<City> {
                             color: isSelected ? AppColor.primary : Colors.white,
                             border: const Border(
                               top: BorderSide(
-                                color: AppColor.black, // Set the color of the top border
-                                width: 0.05, // Set the width of the top border
+                                color: AppColor.black,
+                                width: 0.05,
                               ),
                               bottom: BorderSide(
-                                  color: AppColor.black, // Set the color of the bottom border
-                                  width: 0.05 // Set the width of the bottom border
+                                  color: AppColor.black,
+                                  width: 0.05
                               ),
                             ),
                           ),

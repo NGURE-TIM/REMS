@@ -4,9 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:visanka/view/onBoardViews/welcome_View.dart';
 import 'package:visanka/view/onBoardViews/city_view.dart';
 import 'package:visanka/view/Spashscreen/splash.dart';
-import 'package:visanka/viewModel/city_viewModel.dart';
-import 'package:visanka/viewModel/property_viewModel.dart';
-import 'package:visanka/viewModel/welcome_viewModel.dart';
+import 'package:visanka/viewModel/city_view_model.dart';
+import 'package:visanka/viewModel/home_view_model.dart';
+import 'package:visanka/viewModel/property_view_model.dart';
+import 'package:visanka/viewModel/welcome_view_model.dart';
 import 'package:visanka/view/homeViews/home.dart';
 void main() {
   runApp(const REM());
@@ -26,6 +27,7 @@ class REM extends StatelessWidget {
             ChangeNotifierProvider(create: (context)=>WelcomeViewModel()),
             ChangeNotifierProvider(create: (context)=>CityViewModel()),
             ChangeNotifierProvider(create: (context)=>PropertyViewModel()),
+            ChangeNotifierProvider(create: (context)=>DashBoardviewModel()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -50,5 +52,15 @@ class REM extends StatelessWidget {
   }
 }
 
+/*  leading:  IconButton(
+              icon: Icon(REM.themeNotifier.value == ThemeMode.light
+    ? Icons.dark_mode
+        : Icons.light_mode),
+    onPressed: () {
+      REM.themeNotifier.value =
+      REM.themeNotifier.value == ThemeMode.light
+    ? ThemeMode.dark
+        : ThemeMode.light;
+    }),*/
 
 

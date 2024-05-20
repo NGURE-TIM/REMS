@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:visanka/theme/color.dart';
 import 'package:visanka/view/onBoardViews/property_view.dart';
-import 'package:visanka/viewModel/welcome_viewModel.dart';
+import 'package:visanka/viewModel/welcome_view_model.dart';
 
 
 class Welcome extends StatefulWidget {
@@ -58,6 +58,9 @@ class _WelcomeState extends State<Welcome> {
                   ),
                 ),
                 SizedBox(
+
+
+                  
                   height: 60,
                 ),
                 Text(

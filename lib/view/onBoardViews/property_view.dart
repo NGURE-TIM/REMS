@@ -7,7 +7,7 @@ import 'package:visanka/theme/color.dart';
 import 'package:visanka/view/onBoardViews/welcome_View.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import'package:visanka/view/onBoardViews/city_view.dart';
-import 'package:visanka/viewModel/property_viewModel.dart';
+import 'package:visanka/viewModel/property_view_model.dart';
 
 import '../homeViews/home.dart';
 
