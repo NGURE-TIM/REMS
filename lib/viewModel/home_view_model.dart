@@ -6,6 +6,8 @@ import 'package:visanka/models/home_model.dart';
 class DashBoardviewModel extends ChangeNotifier {
   List items = DashBoardModel.items;
   List states=DashBoardModel.states;
+  List categories=DashBoardModel.categoryItems;
+  List categoriesStates=DashBoardModel.categoryStates;
  changeState(int index) {
    for (int i = 0; i < states.length; i++) {
      states[i] = (i == index);
@@ -13,4 +15,13 @@ class DashBoardviewModel extends ChangeNotifier {
 
    notifyListeners();
  }
+  changeCategoryState(int index) {
+    for (int i = 0; i < categoriesStates.length; i++) {
+      categoriesStates[i] = (i == index);
+    }
+
+    notifyListeners();
+  }
+
+
 }

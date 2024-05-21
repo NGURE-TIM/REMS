@@ -40,6 +40,7 @@ dependencies:
   dropdown_search: ^5.0.6
   provider: ^6.1.2
   stylish_bottom_bar: ^1.1.0
+  bottom_sheet: ^4.0.4
 
 dev_dependencies:
   flutter_test:
