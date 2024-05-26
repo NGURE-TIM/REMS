@@ -58,7 +58,7 @@ class AppTheme{
         ),
         bodyMedium: GoogleFonts.getFont(
             'Roboto',
-            fontSize: 14,
+            fontSize: 15,
             color: AppColor.secondary
         ),  bodySmall: GoogleFonts.getFont(
           'Roboto',

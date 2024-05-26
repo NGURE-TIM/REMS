@@ -20,6 +20,6 @@ class Property {
   static bool press =false;
   static String property = '';
   static List<String> properties =['Apartments',
-    'Houses','Offices','Villas' ,'Lands'
+    'Houses','Offices','Villas' ,'Lands',
   ];
 }
