@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:visanka/models/home_model.dart';
 
 class DashBoardviewModel extends ChangeNotifier {
+  String? selectedSort=DashBoardModel.selectedSort ;
   int listing=DashBoardModel.listing;
   int newListing =DashBoardModel.newListing;
   List items = DashBoardModel.items;
@@ -11,7 +12,7 @@ class DashBoardviewModel extends ChangeNotifier {
   List categories=DashBoardModel.categoryItems;
   List categoriesStates=DashBoardModel.categoryStates;
   List number=DashBoardModel.number;
-
+  List sortItems=DashBoardModel.sortItems;
   String numberProperties= '__';//placeholder
 
 
@@ -34,7 +35,11 @@ class DashBoardviewModel extends ChangeNotifier {
 
   List<Unit> unit =DashBoardModel.units;
 
+selectedItem(value){
+selectedSort=value;
 
+  notifyListeners();
+}
  changeState(int index) {
    for (int i = 0; i < states.length; i++) {
      states[i] = (i == index);

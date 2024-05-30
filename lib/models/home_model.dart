@@ -5,6 +5,8 @@ import 'package:visanka/models/onboard_model.dart';
 
 
 class DashBoardModel extends Property {
+ static  String selectedSort='Featured';
+ static List <String> sortItems=['Featured','Newest','Price(low)','Price(high)','Verified agents'];
  static int listing =1750; // all properties currently in the database
  static int newListing =17; // all new properties currently in the database
  static List<String> items =['Preference', 'Property Type', 'Price', 'Beds & Baths ', 'Features',];

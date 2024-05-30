@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:visanka/theme/color.dart';
@@ -14,14 +15,14 @@ import 'package:animated_icon/animated_icon.dart';
 const khintstyle=TextStyle(
     color: AppColor.grey
 );
-
+DashBoardviewModel _boardviewModel =DashBoardviewModel();
 class Dash extends StatefulWidget {
   const Dash({Key? key}) : super(key: key);
   @override
   State<Dash> createState() => _DashState();
 }
 class _DashState extends State<Dash> {
-  DashBoardviewModel _boardviewModel =DashBoardviewModel();
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -122,28 +123,29 @@ class _DashState extends State<Dash> {
                       ],
                     ),
                     Spacer(),
-                    GestureDetector(
-                      onTap: (){
-                        DropdownButton(items: [], onChanged: (Object? value) {  },
-
-                        )
-                      },
-                      child: Container(
-                        decoration:BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border.all(
-                            color: AppColor.grey, // Border color
-                            width: 1.0, // Border width
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
+                    Container(
+                      decoration:BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(
+                          color: AppColor.grey, // Border color
+                          width: 1.0, // Border width
                         ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           children: [
-                            IconButton(onPressed: (){
+                            GestureDetector(
 
-                            }, icon:Icon(Icons.sort) ),
+                                            onTapDown: (details){
+                                            _showPopupMenu(context,details.globalPosition);
+                                            },
+
+                              child: Container(height:30,width: 30 , child: Image.asset('assets/images/home/sort.png')),
+                            ),
                             Padding(
-                              padding: const EdgeInsets.only(right: 10),
+                              padding: const EdgeInsets.only(left: 5),
                               child: Text(
                                 'Sort',
                                   style:TextStyle(color:AppColor.black)
@@ -157,7 +159,8 @@ class _DashState extends State<Dash> {
 
                   ],
                 ),
-              )
+              ),
+
 
 
             ],
@@ -171,6 +174,52 @@ class _DashState extends State<Dash> {
   }
 }
 
+
+void _showPopupMenu(BuildContext context, Offset position) async {
+
+  await showMenu(
+    elevation: 3,
+    shadowColor: AppColor.primary.withOpacity(.08),
+    color: AppColor.white,
+
+    context: context,
+    position:  RelativeRect.fromLTRB(position.dx, position.dy+10, position.dx, 0),
+    items: _boardviewModel.sortItems.map((item) {
+
+      return PopupMenuItem<String>(
+
+        onTap:(){
+
+            Provider.of<DashBoardviewModel>(context, listen: false).selectedItem(item);
+        },
+        value: item,
+        child:
+          Consumer<DashBoardviewModel>( builder: (context, model, child){
+print(model.selectedSort);
+          return
+          Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Text(
+                item,
+                style: TextStyle(
+                  color: model.selectedSort== item ? AppColor.black:AppColor.secondary ,
+                  fontWeight: model.selectedSort == item ? FontWeight.w900 : FontWeight.w700,
+                ),
+              ),
+              model.selectedSort== item ? Padding(
+                padding: const EdgeInsets.only(left:10.0),
+                child: Icon(Icons.check),
+              ) : SizedBox.shrink(),
+            ],
+          ),
+        );}),
+      );
+
+    }).toList(),
+  );
+}
 
 
 showBottom(BuildContext context ,int index){
