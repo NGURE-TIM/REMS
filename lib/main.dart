@@ -9,6 +9,7 @@ import 'package:visanka/viewModel/home_view_model.dart';
 import 'package:visanka/viewModel/property_view_model.dart';
 import 'package:visanka/viewModel/welcome_view_model.dart';
 import 'package:visanka/view/homeViews/home.dart';
+import 'package:visanka/view/homeViews/unit_view.dart';
 void main() {
   runApp(const REM());
 }
@@ -38,6 +39,7 @@ class REM extends StatelessWidget {
               Welcome.id:(context)=>Welcome(),
               City.id:(context)=>City(),
               Home.id:(context)=>Home(),
+              Unit.id:(context)=>Unit(),
             },
             title: 'REM',
             home: const Splash(),

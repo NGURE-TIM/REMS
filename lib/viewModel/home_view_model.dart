@@ -34,6 +34,15 @@ class DashBoardviewModel extends ChangeNotifier {
 
 
   List<Unit> unit =DashBoardModel.units;
+List <bool> favourite =List.generate(DashBoardModel.units.length, (index) => false);
+  changefavourite(int index)
+  {
+    //todo:update the state of the icon only if the user is logged in
+    //todo:catch an unlooged in user and prompt registration
+
+    favourite[index]=!favourite[index];
+    notifyListeners();
+  }
 selectedItem(value){
 selectedSort=value;
 

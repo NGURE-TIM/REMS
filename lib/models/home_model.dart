@@ -1,5 +1,7 @@
 
 
+import 'dart:math';
+
 import 'package:visanka/models/onboard_model.dart';
 
 
@@ -25,11 +27,19 @@ static  bool searchButtonState =false;
  static  List<String> bathrooms=['1','2','3','4','5','6','7','7+'];
  static List<String> popularFeatures=['Pet Friendly','Fire Alarm',' Laundry','Modern Kitchen','Pool','Gym','EmergencyExit'];
  static List<String> featuredAmenities=['Center Cooling','Storage','Heating','Sauna','Dish Washer','Balcony','Barbeque','Dryer','Elevator'];
-static List<Unit> units=[ Unit('House', 'Sale', 100,
-    Agent('Rajesh Singh','assets/images/home/Unit/Agent/OIP (4).jpg','4446464646'), '131599041',
+static List<Unit> units=[ Unit( Random().nextInt(10), 'House', 'Sale', 100,
+    Agent('Rajesh Singh','assets/images/home/Unit/Agent/agent1/OIP (4).jpg','4446464646'), '131599041',
     'There two bed room with wide balcony. 2. Drawing room with fall ceiling & Texture Paint 3. Modern and modular kitchen with chimney and other attachments. 4. two bath room with tile work upto roof height and branded fittings. 5. Car parking and lift available. 6. Wall to wall pop , texture paint & tiles work on front elevation. 7. Vitrified tiles flooring, Kalinga wire, Branded electrical fittings. 8. Separate electric and water connections with appropriate supply.',
    'Delhi', 'Delhi/NCR', 'Sector 24','800 sqft',
-    ['assets/images/home/Unit/unitImages/pexels-christa-grover-977018-2121121.jpg','assets/images/home/Unit/unitImages/pexels-curtis-adams-1694007-24245748.jpg','assets/images/home/Unit/unitImages/pexels-itsterrymag-2635038.jpg' , ' assets/images/home/Unit/unitImages/pexels-jvdm-1454805.jpg','assets/images/home/Unit/unitImages/pexels-jvdm-1457847.jpg','assets/images/home/Unit/unitImages/pexels-pixabay-280229.jpg','assets/images/home/Unit/unitImages/pexels-vince-2227832.jpg'],
+ ['assets/images/home/Unit/unitImages/unit1/pexels-christa-grover-977018-2121121.jpg',
+ 'assets/images/home/Unit/unitImages/unit1/pexels-curtis-adams-1694007-24245748.jpg',
+ 'assets/images/home/Unit/unitImages/unit1/pexels-itsterrymag-2635038.jpg',
+ 'assets/images/home/Unit/unitImages/unit1/pexels-jvdm-1454805.jpg',
+ 'assets/images/home/Unit/unitImages/unit1/pexels-jvdm-1457847.jpg',
+ 'assets/images/home/Unit/unitImages/unit1/pexels-pixabay-280229.jpg',
+ 'assets/images/home/Unit/unitImages/unit1/pexels-vince-2227832.jpg'
+
+ ],
 Features({'Pet Friendly': false,
  'Fire Alarm':true,
  'Laundry' :true,
@@ -52,61 +62,42 @@ Features({'Pet Friendly': false,
  'Bedrooms':3
 
 })
-),Unit('House', 'Sale', 100,
-    Agent('Rajesh Singh','assets/images/home/Unit/Agent/OIP (4).jpg','4446464646'), '131599041',
+),Unit(Random().nextInt(10),'Villa', 'Sale', 24.1,
+    Agent('Akash','assets/images/home/Unit/Agent/agent2/OI.jpeg','8596234569'), '629126491',
     'There two bed room with wide balcony. 2. Drawing room with fall ceiling & Texture Paint 3. Modern and modular kitchen with chimney and other attachments. 4. two bath room with tile work upto roof height and branded fittings. 5. Car parking and lift available. 6. Wall to wall pop , texture paint & tiles work on front elevation. 7. Vitrified tiles flooring, Kalinga wire, Branded electrical fittings. 8. Separate electric and water connections with appropriate supply.',
-    'Delhi', 'Delhi/NCR', 'Sector 24','800 sqft',
-    ['assets/images/home/Unit/unitImages/pexels-christa-grover-977018-2121121.jpg','assets/images/home/Unit/unitImages/pexels-curtis-adams-1694007-24245748.jpg','assets/images/home/Unit/unitImages/pexels-itsterrymag-2635038.jpg' , ' assets/images/home/Unit/unitImages/pexels-jvdm-1454805.jpg','assets/images/home/Unit/unitImages/pexels-jvdm-1457847.jpg','assets/images/home/Unit/unitImages/pexels-pixabay-280229.jpg','assets/images/home/Unit/unitImages/pexels-vince-2227832.jpg'],
+    'Patna', 'Bihar', 'Uttam Nagar','520 sqft',
+   [
+     'assets/images/home/Unit/unitImages/unit2/pexels-photo-262048.jpeg',
+     'assets/images/home/Unit/unitImages/unit2/pexels-photo-1040893.jpeg',
+     'assets/images/home/Unit/unitImages/unit2/pexels-photo-1918291.jpeg',
+     'assets/images/home/Unit/unitImages/unit2/pexels-photo-6970048.jpeg',
+     'assets/images/home/Unit/unitImages/unit2/pexels-pixabay-208736.jpg',
+     'assets/images/home/Unit/unitImages/unit2/pexels-pixabay-276724.jpg'
+
+   ],
     Features({'Pet Friendly': false,
-     'Fire Alarm':true,
+     'Fire Alarm':false,
      'Laundry' :true,
      'Modern Kitchen' :true,
      'Pool': true,
      'Gym':true,
      'Garage':true,
      "EmergencyExit" :true,
-     "Center Cooling" :false,
+     "Center Cooling" :true,
      "Storage" :true,
      "Heating" :false,
      "Sauna" :false,
      "Dish Washer" :true,
-     "Balcony" :true,
-     "Barbeque" :true,
+     "Balcony" :false,
+     "Barbeque" :false,
      "Dryer" :true,
      "Elevator" :true,
     }, {
-     'Baths':2,
-     'Bedrooms':3
+     'Baths':3,
+     'Bedrooms':8
 
     })
-),Unit('House', 'Sale', 100,
-    Agent('Rajesh Singh','assets/images/home/Unit/Agent/OIP (4).jpg','4446464646'), '131599041',
-    'There two bed room with wide balcony. 2. Drawing room with fall ceiling & Texture Paint 3. Modern and modular kitchen with chimney and other attachments. 4. two bath room with tile work upto roof height and branded fittings. 5. Car parking and lift available. 6. Wall to wall pop , texture paint & tiles work on front elevation. 7. Vitrified tiles flooring, Kalinga wire, Branded electrical fittings. 8. Separate electric and water connections with appropriate supply.',
-    'Delhi', 'Delhi/NCR', 'Sector 24','800 sqft',
-    ['assets/images/home/Unit/unitImages/pexels-christa-grover-977018-2121121.jpg','assets/images/home/Unit/unitImages/pexels-curtis-adams-1694007-24245748.jpg','assets/images/home/Unit/unitImages/pexels-itsterrymag-2635038.jpg' , ' assets/images/home/Unit/unitImages/pexels-jvdm-1454805.jpg','assets/images/home/Unit/unitImages/pexels-jvdm-1457847.jpg','assets/images/home/Unit/unitImages/pexels-pixabay-280229.jpg','assets/images/home/Unit/unitImages/pexels-vince-2227832.jpg'],
-    Features({'Pet Friendly': false,
-     'Fire Alarm':true,
-     'Laundry' :true,
-     'Modern Kitchen' :true,
-     'Pool': true,
-     'Gym':true,
-     'Garage':true,
-     "EmergencyExit" :true,
-     "Center Cooling" :false,
-     "Storage" :true,
-     "Heating" :false,
-     "Sauna" :false,
-     "Dish Washer" :true,
-     "Balcony" :true,
-     "Barbeque" :true,
-     "Dryer" :true,
-     "Elevator" :true,
-    }, {
-     'Baths':2,
-     'Bedrooms':3
-
-    })
-)  ];
+), ];
 }
 
 
@@ -127,6 +118,7 @@ class Features {
 //unit is one specific item i.e a house/land/apartment
 class Unit {
  //todo: add date of listing
+  late int listingDate;
  late String propertytype; //apartment/land
  late String propertystatus;//rent / sale
  late double propertyprice;
@@ -139,7 +131,7 @@ class Unit {
  late String propertySize;
  late List<String> propertyImages;
  late Features feature ;
- Unit(this.propertytype ,this.propertystatus, this.propertyprice ,
+ Unit(this.listingDate ,this.propertytype ,this.propertystatus, this.propertyprice ,
      this.propertyagent, this.propertyId,this.propertyInfo,this.propertyCity,this.propertyState,
      this.propertyAddress,this.propertySize,this.propertyImages,this.feature
      );

@@ -3,10 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:visanka/theme/color.dart';
+import 'package:visanka/view/homeViews/unit_view.dart';
 import 'package:visanka/viewModel/home_view_model.dart';
 import 'package:animated_emoji/animated_emoji.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -50,277 +52,388 @@ class _DashState extends State<Dash> {
           ],
         ),
         backgroundColor: AppColor.white,
-        body: CustomScrollView(
-      slivers: [
-      SliverAppBar(
-      floating: true,
-        expandedHeight: 200,
-        flexibleSpace: FlexibleSpaceBar(
-          background: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0 ,right: 20),
-                child: Container(
-                  height: 40,
-                  child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children:List.generate(_boardviewModel.items.length, (index) =>   Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: Consumer<DashBoardviewModel>( builder:(context,dataProviderModel,child){
-                          return GestureDetector(
-                            onTap: (){
-                              Provider.of<DashBoardviewModel>(context , listen: false).changeState(index);
-                              showBottom(context,index);
-                            },
-                            child: Container(
-                              decoration:BoxDecoration(
-                                color: dataProviderModel.states[index] ? AppColor.secondary.withOpacity(0.4):AppColor.white,
-                                border: Border.all(
-                                  color: AppColor.grey, // Border color
-                                  width: 1.0, // Border width
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0 ,right: 20),
+              child: Container(
+                height: 40,
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children:List.generate(_boardviewModel.items.length, (index) =>   Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Consumer<DashBoardviewModel>( builder:(context,dataProviderModel,child){
+                        return GestureDetector(
+                          onTap: (){
+                            Provider.of<DashBoardviewModel>(context , listen: false).changeState(index);
+                            showBottom(context,index);
+                          },
+                          child: Container(
+                            decoration:BoxDecoration(
+                              color: dataProviderModel.states[index] ? AppColor.secondary.withOpacity(0.4):AppColor.white,
+                              border: Border.all(
+                                color: AppColor.grey, // Border color
+                                width: 1.0, // Border width
                               ),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      _boardviewModel.items[index],
-                                      style:Theme.of(context).textTheme.displayMedium,
-                                    ),
-                                  ),
-                                  IconButton(onPressed: (){
-                                    Provider.of<DashBoardviewModel>(context , listen: false).changeState(index);
-                                    showBottom(context,index);
-                                  }, icon:Icon(Icons.arrow_drop_down) )
-                                ],
-                              ),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
-                          );
-                        }
-                        ),
-                      ),)
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    _boardviewModel.items[index],
+                                    style:Theme.of(context).textTheme.displayMedium,
+                                  ),
+                                ),
+                                IconButton(onPressed: (){
+                                  Provider.of<DashBoardviewModel>(context , listen: false).changeState(index);
+                                  showBottom(context,index);
+                                }, icon:Icon(Icons.arrow_drop_down) )
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      ),
+                    ),)
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
+              child: Divider(
+                color: AppColor.primary.withOpacity(0.5),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0 ,right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('${_boardviewModel.listing} properties found.',style:TextStyle(color:AppColor.black)),
+                      Container(
+                          color: AppColor.primary,
+                          child: Text('${_boardviewModel.newListing} new.', style:TextStyle(color:AppColor.black) )),
+
+                    ],
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top : 5.0, bottom: 5),
-                child: Divider(
-                  color: AppColor.primary.withOpacity(.5),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0 ,right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('${_boardviewModel.listing} properties found.',style:TextStyle(color:AppColor.black)),
-                        Container(
-                            color: AppColor.primary,
-                            child: Text('${_boardviewModel.newListing} new.', style:TextStyle(color:AppColor.black) )),
-
-                      ],
-                    ),
-                    Spacer(),
-                    Container(
-                      decoration:BoxDecoration(
-                        color: Colors.transparent,
-                        border: Border.all(
-                          color: AppColor.grey, // Border color
-                          width: 1.0, // Border width
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
+                  Spacer(),
+                  Container(
+                    decoration:BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(
+                        color: AppColor.grey, // Border color
+                        width: 1.0, // Border width
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Row(
-                          children: [
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        children: [
 
-                            GestureDetector(
+                          GestureDetector(
 
-                              onTapDown: (details){
-                                _showPopupMenu(context,details.globalPosition);
-                              },
+                            onTapDown: (details){
+                              _showPopupMenu(context,details.globalPosition);
+                            },
 
-                              child: Container(height:30,width: 30 , child: Image.asset('assets/images/home/sort.png')),
+                            child: Container(height:30,width: 30 , child: Image.asset('assets/images/home/sort.png')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text(
+                                'Sort',
+                                style:TextStyle(color:AppColor.black)
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                  'Sort',
-                                  style:TextStyle(color:AppColor.black)
-                              ),
-                            ),
+                          ),
 
-                          ],
-                        ),
+                        ],
                       ),
                     ),
+                  ),
 
-                  ],
-                ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ),
-      SliverList(
-        delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Card(
-                    shadowColor: AppColor.primary,
-                    elevation:4,
-                    child:Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 150,
-                          width: double.infinity,
-                          child: Image.asset('assets/images/home/Unit/unitImages/pexels-christa-grover-977018-2121121.jpg', fit: BoxFit.cover,),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              Text(_boardviewModel.unit[index].propertytype),
-                              Spacer(),
-                              Text('Listed 1 day ago')
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom:10.0, left: 10,right: 10),
-                          child: Text('${_boardviewModel.unit[index].propertyprice} LACS'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom:10.0, left: 10,right: 10),
-                          child: Row(
-                            children: [
-                              Icon(Icons.location_on_outlined),
-                              SizedBox(width: 10,),
-                              Text(_boardviewModel.unit[index].propertyCity)
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom:10.0, left: 10,right: 10),
-                          child: Row(
-                            children: [
-                              Icon(Icons.bedroom_parent_outlined),
-                              SizedBox(width: 5,),
-                              Text(_boardviewModel.unit[index].feature.amenities['Bedrooms'] . toString()),
-                              SizedBox(width: 10,),
-                              Icon(Icons.bathtub_outlined),
-                              SizedBox(width: 5,),
-                              Text(_boardviewModel.unit[index].feature.amenities['Baths'] . toString()),
-                              SizedBox(width: 10,),
-                              Icon(MdiIcons.tapeMeasure),
-                              SizedBox(width: 5,),
-                              Text(_boardviewModel.unit[index].propertySize)
-                            ],
-                          ),
-                        ),
+            ),
 
-                        Padding(
-                            padding: const EdgeInsets.only(bottom:10.0,),
-                            child: Divider(
-                              height: 1,
-                              thickness: .5,
-                              color: AppColor.black,
-                            )
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(bottom:10.0,),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+            Expanded(
+              child: CustomScrollView(
+                    slivers: [
+                      SliverList(
+              delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 20.0 , right: 20 , top: 20),
+                      child: Card(
+                          shadowColor: AppColor.primary,
+                          elevation:4,
+                          child:Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               GestureDetector(
-                                onTap: () async {
-                                  //todo : call agent
-                                },
-                                child: Container(
-                                  width: 140,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color:   AppColor.primary,
-                                    borderRadius: BorderRadius.circular(12), // Adjust border radius as needed
+                            onTap:(){
 
+                              Navigator.pushNamed(context,Unit.id);
+                            },
+                                child: Stack(children: [
+                                  FlutterCarousel(
+                                    options: CarouselOptions(
+                                      height: 200,
+                                      autoPlay: true,
+                                      autoPlayInterval: const Duration(seconds: 10),
+                                      viewportFraction: 1,
+                                      enlargeCenterPage: true,
+                                      showIndicator: true,
+                                      slideIndicator: const CircularSlideIndicator(
+                                          indicatorBorderColor: AppColor.white,
+                                          currentIndicatorColor: AppColor.primary,
+                                          indicatorBackgroundColor:AppColor.grey
+                                      ),
+                                      floatingIndicator: true,
+                                      enableInfiniteScroll: true,
+                                    ),
+                                    items: _boardviewModel.unit[index].propertyImages.map((item) {
+                                      return Builder(
+                                        builder: (BuildContext context) {
+                                          return Image(
+                                              width: double.infinity,
+                                              fit: BoxFit.cover,
+                                              image: AssetImage(item));
+                                        },
+                                      );
+                                    }).toList(),
                                   ),
-                                  child: Center(
-
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Icon(Icons.call),
-                                        SizedBox(
-                                          width: 10,
+                                
+                                  Positioned(
+                                    top: 150,
+                                    left: 10,
+                                    child: ClipOval(
+                                      child: Container(
+                                        height:40,
+                                        width: 40,
+                                        child: Image.asset(
+                                          _boardviewModel.unit[index].propertyagent.imagepath,  // Your image asset path
+                                          fit: BoxFit.cover,  // Adjust as per your requirement
                                         ),
-                                        Text(
-                                            'Call',
-                                            style: Theme.of(context).textTheme.displayMedium
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
+                                                      Consumer<DashBoardviewModel>( builder: (context, model, child){
+                                                        return Positioned(
+                                                          bottom: 150,
+                                                          right: 10,
+                                                          child: ClipOval(
+                                                            child: Container(
+                                  decoration: BoxDecoration(
+                                      color: AppColor.black.withOpacity(0.4)
+                                  ),
+                                  height:40,
+                                  width: 40,
+                                  child: IconButton(
+                                
+                                    onPressed: () {
+                                      Provider.of<DashBoardviewModel>(context , listen: false).changefavourite(index);
+                                    },
+                                    icon: Icon(
+                                      model.favourite[index]?   MdiIcons.heart:MdiIcons.heartOutline,
+                                
+                                      color:  model.favourite[index] ? AppColor.error:AppColor.white,
+                                    ),
+                                  )
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
+                                
+                                  Positioned(
+                                    bottom: 170,
+                                    left: 10,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(12.0),
+                                          border: Border.all(
+                                            color: AppColor.white, // Border color
+                                            width: .5, // Border width
+                                          ),
+                                        color: AppColor.error
+                                      ),
+                                
+                                
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: Row(
+                                          children: [
+                                            Icon(MdiIcons.shieldAccountVariant,size: 15, color: AppColor.white,),
+                                            Text('VERIFIED AGENT', style:TextStyle(fontSize: 10, color: AppColor.white),),
+                                          ],
+                                        ),
+                                      )
+                                    ),
+                                  ),
+                                ],),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Row(
+                                  children: [
+                                    Text(_boardviewModel.unit[index].propertytype),
+                                    Spacer(),
+                                    Text('Listed 1 day ago')
+                                  ],
                                 ),
                               ),
-                              SizedBox(
-                                width: 20,
+                              Padding(
+                                padding: const EdgeInsets.only(bottom:5.0, left: 10,right: 10),
+                                child: Text('${_boardviewModel.unit[index].propertyprice} Lacs'),
                               ),
-                              GestureDetector(
-                                onTap: () async {
-                                  //todo : call agent
-                                },
-                                child: Container(
-                                  width: 140,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color:   AppColor.primary,
-                                    borderRadius: BorderRadius.circular(12), // Adjust border radius as needed
-
-                                  ),
-                                  child: Center(
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-
-                                        Icon(MdiIcons.whatsapp),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          'Whatsapp',
-                                          style:Theme.of(context).textTheme.displayMedium,
-                                        ),
-                                      ],
+                              Padding(
+                                padding: const EdgeInsets.only(bottom:5.0, left: 10,right: 10),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.location_city),
+                                    SizedBox(width: 5,),
+                                    Text(_boardviewModel.unit[index].propertyCity),
+                                    SizedBox(
+                                      width: 20,
                                     ),
-                                  ),
+                                    Icon(Icons.flag),
+                                    SizedBox(width: 5,),
+                                    Text(_boardviewModel.unit[index].propertyState)
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom:5.0, left: 10,right: 10),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.location_on_outlined),
+                                    SizedBox(width: 5,),
+                                    Text(_boardviewModel.unit[index].propertyAddress)
+                                  ],
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.only(bottom:5.0, left: 10,right: 10),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.bedroom_parent_outlined),
+                                    SizedBox(width: 5,),
+                                    Text(_boardviewModel.unit[index].feature.amenities['Bedrooms'] . toString()),
+                                    SizedBox(width: 10,),
+                                    Icon(Icons.bathtub_outlined),
+                                    SizedBox(width: 5,),
+                                    Text(_boardviewModel.unit[index].feature.amenities['Baths'] . toString()),
+                                    SizedBox(width: 10,),
+                                    Icon(MdiIcons.tapeMeasure),
+                                    SizedBox(width: 5,),
+                                    Text(_boardviewModel.unit[index].propertySize)
+                                  ],
+                                ),
+                              ),
+              
+                              Padding(
+                                  padding: const EdgeInsets.only(bottom:10.0,),
+                                  child: Divider(
+                                    height: 1,
+                                    thickness: .5,
+                                    color: AppColor.black,
+                                  )
+                              ),
+              
+                              Padding(
+                                padding: const EdgeInsets.only(bottom:10.0,),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () async {
+                                        //todo : call agent
+                                      },
+                                      child: Container(
+                                        width: 140,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          color:   AppColor.primary,
+                                          borderRadius: BorderRadius.circular(12), // Adjust border radius as needed
+              
+                                        ),
+                                        child: Center(
+              
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Icon(Icons.call),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                  'Call',
+                                                  style: Theme.of(context).textTheme.displayMedium
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () async {
+                                        //todo : call agent
+                                      },
+                                      child: Container(
+                                        width: 140,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          color:   AppColor.primary,
+                                          borderRadius: BorderRadius.circular(12), // Adjust border radius as needed
+              
+                                        ),
+                                        child: Center(
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+              
+                                              Icon(MdiIcons.whatsapp),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                'Whatsapp',
+                                                style:Theme.of(context).textTheme.displayMedium,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ],
-                    )
-                ),
-              );
-            },
-            childCount: _boardviewModel.unit.length
+                          )
+                      ),
+                    );
+                  },
+                  childCount: _boardviewModel.unit.length
+              ),
+                    ),
+                    ],
+                  ),
+            ),
+          ],
         ),
-      ),
-      ],
-    ),
 
     ),
     );
