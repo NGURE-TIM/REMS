@@ -48,6 +48,8 @@ dependencies:
   dropdown_button2: ^2.3.9
   material_design_icons_flutter: ^7.0.7296
   flutter_carousel_widget: ^2.2.0
+  glass_kit: ^4.0.1
+  expandable_text: ^2.3.0
 
 dev_dependencies:
   flutter_test:

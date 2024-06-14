@@ -27,9 +27,9 @@ static  bool searchButtonState =false;
  static  List<String> bathrooms=['1','2','3','4','5','6','7','7+'];
  static List<String> popularFeatures=['Pet Friendly','Fire Alarm',' Laundry','Modern Kitchen','Pool','Gym','EmergencyExit'];
  static List<String> featuredAmenities=['Center Cooling','Storage','Heating','Sauna','Dish Washer','Balcony','Barbeque','Dryer','Elevator'];
-static List<Unit> units=[ Unit( Random().nextInt(10), 'House', 'Sale', 100,
-    Agent('Rajesh Singh','assets/images/home/Unit/Agent/agent1/OIP (4).jpg','4446464646'), '131599041',
-    'There two bed room with wide balcony. 2. Drawing room with fall ceiling & Texture Paint 3. Modern and modular kitchen with chimney and other attachments. 4. two bath room with tile work upto roof height and branded fittings. 5. Car parking and lift available. 6. Wall to wall pop , texture paint & tiles work on front elevation. 7. Vitrified tiles flooring, Kalinga wire, Branded electrical fittings. 8. Separate electric and water connections with appropriate supply.',
+static List<Unit> units=[ Unit( '3 BHK 800 Sq-Ft Flat',Random().nextInt(10), 'House', 'Sale', 100,
+    Agent('Rajesh Koothrappali','assets/images/home/Unit/Agent/agent1/OIP (4).jpg','4446464646'), '131599041',
+    '1.There two bed room with wide balcony. 2. Drawing room with fall ceiling & Texture Paint 3. Modern and modular kitchen with chimney and other attachments. 4. two bath room with tile work upto roof height and branded fittings. 5. Car parking and lift available. 6. Wall to wall pop , texture paint & tiles work on front elevation. 7. Vitrified tiles flooring, Kalinga wire, Branded electrical fittings. 8. Separate electric and water connections with appropriate supply.',
    'Delhi', 'Delhi/NCR', 'Sector 24','800 sqft',
  ['assets/images/home/Unit/unitImages/unit1/pexels-christa-grover-977018-2121121.jpg',
  'assets/images/home/Unit/unitImages/unit1/pexels-curtis-adams-1694007-24245748.jpg',
@@ -62,9 +62,9 @@ Features({'Pet Friendly': false,
  'Bedrooms':3
 
 })
-),Unit(Random().nextInt(10),'Villa', 'Sale', 24.1,
+),Unit('2 BHK Builder Floor',Random().nextInt(10),'Villa', 'Sale', 24.1,
     Agent('Akash','assets/images/home/Unit/Agent/agent2/OI.jpeg','8596234569'), '629126491',
-    'There two bed room with wide balcony. 2. Drawing room with fall ceiling & Texture Paint 3. Modern and modular kitchen with chimney and other attachments. 4. two bath room with tile work upto roof height and branded fittings. 5. Car parking and lift available. 6. Wall to wall pop , texture paint & tiles work on front elevation. 7. Vitrified tiles flooring, Kalinga wire, Branded electrical fittings. 8. Separate electric and water connections with appropriate supply.',
+    '1.There two bed room with wide balcony. 2. Drawing room with fall ceiling & Texture Paint 3. Modern and modular kitchen with chimney and other attachments. 4. two bath room with tile work upto roof height and branded fittings. 5. Car parking and lift available. 6. Wall to wall pop , texture paint & tiles work on front elevation. 7. Vitrified tiles flooring, Kalinga wire, Branded electrical fittings. 8. Separate electric and water connections with appropriate supply.',
     'Patna', 'Bihar', 'Uttam Nagar','520 sqft',
    [
      'assets/images/home/Unit/unitImages/unit2/pexels-photo-262048.jpeg',
@@ -119,7 +119,8 @@ class Features {
 class Unit {
  //todo: add date of listing
   late int listingDate;
- late String propertytype; //apartment/land
+  late String shortDescription;
+  late String propertytype; //apartment/land
  late String propertystatus;//rent / sale
  late double propertyprice;
  late Agent propertyagent;
@@ -131,7 +132,7 @@ class Unit {
  late String propertySize;
  late List<String> propertyImages;
  late Features feature ;
- Unit(this.listingDate ,this.propertytype ,this.propertystatus, this.propertyprice ,
+ Unit(  this.shortDescription,  this.listingDate ,this.propertytype ,this.propertystatus, this.propertyprice ,
      this.propertyagent, this.propertyId,this.propertyInfo,this.propertyCity,this.propertyState,
      this.propertyAddress,this.propertySize,this.propertyImages,this.feature
      );

@@ -180,7 +180,8 @@ class _DashState extends State<Dash> {
                               GestureDetector(
                             onTap:(){
 
-                              Navigator.pushNamed(context,Unit.id);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Unit(index)));
+
                             },
                                 child: Stack(children: [
                                   FlutterCarousel(

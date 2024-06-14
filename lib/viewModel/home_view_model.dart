@@ -35,6 +35,13 @@ class DashBoardviewModel extends ChangeNotifier {
 
   List<Unit> unit =DashBoardModel.units;
 List <bool> favourite =List.generate(DashBoardModel.units.length, (index) => false);
+
+bool expand=false;
+showExapandParagraph(){
+  expand=!expand;
+  notifyListeners();
+}
+
   changefavourite(int index)
   {
     //todo:update the state of the icon only if the user is logged in

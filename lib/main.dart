@@ -39,7 +39,7 @@ class REM extends StatelessWidget {
               Welcome.id:(context)=>Welcome(),
               City.id:(context)=>City(),
               Home.id:(context)=>Home(),
-              Unit.id:(context)=>Unit(),
+
             },
             title: 'REM',
             home: const Splash(),

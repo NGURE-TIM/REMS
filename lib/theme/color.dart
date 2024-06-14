@@ -7,6 +7,6 @@ class AppColor{
 static const secondary = Color(0xFF394E62);
   static const error =Colors.red;
   static const grey =Colors.grey;
-  //static const secondary=Color(0xFF4B0082);
+  static const secondary2=Color(0xFF4B0082);
 
 }
